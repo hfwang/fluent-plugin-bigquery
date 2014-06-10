@@ -344,7 +344,7 @@ module Fluent
       end
 
       def format_one(value)
-        raise NotImplementedError, "Must implement in a subclass" 
+        raise NotImplementedError, "Must implement in a subclass"
       end
     end
 
@@ -354,7 +354,11 @@ module Fluent
       end
 
       def format_one(value)
-        value.to_s
+        if Hash === value || Array === value
+          value.to_json
+        else
+          value.to_s
+        end
       end
     end
 
